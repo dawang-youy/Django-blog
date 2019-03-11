@@ -102,3 +102,13 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+.pyre/
+
+/logs/dj_youkou.log
+my.cnf
+sms.py
+qiniu_secret_info.py
