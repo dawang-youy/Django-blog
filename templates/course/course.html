@@ -1,0 +1,72 @@
+{% extends 'base/base.html' %}
+{% block link %}
+  <link rel="stylesheet" href="../../static/css/course/course.css">
+{% endblock %}
+{% block title %}
+在线课堂
+{% endblock %}
+<!-- header start -->
+<!-- header end -->
+{% block main_start %}
+  <main id="course-container">
+        <div class="w1200">
+            <ul class="course-list">
+                {% for item in course %}
+                    <li class="course-item">
+                        <a href="{% url 'course:course_detail' item.id %}">
+                            <img class="course-img" src="{{ item.cover_url }}"
+                                alt="潭州英语">
+                            <div class="course-content">
+                                <p class="course-info">{{ item.title }}</p>
+                                <p class="course-author">{{ item.teacher }}</p>
+                                <p class="course-price free">免费</p>
+                            </div>
+                        </a>
+                    </li>
+                {% endfor %}
+
+{#                <li class="course-item">#}
+{#                    <a href="https://www.shiguangkey.com/course/2432">#}
+{#                        <img class="course-img" src="../../static/images/python_advanced.jpg"#}
+{#                            alt="潭州英语">#}
+{#                        <div class="course-content">#}
+{#                            <p class="course-info">python 全栈开发</p>#}
+{#                            <p class="course-author">不动(python金牌讲师)</p>#}
+{#                            <p class="course-price free">免费</p>#}
+{#                        </div>#}
+{#                    </a>#}
+{#                </li>#}
+{##}
+{#                <li class="course-item">#}
+{#                    <a href="https://www.shiguangkey.com/course/2432">#}
+{#                        <img class="course-img" src="../../static/images/python_web.jpg"#}
+{#                            alt="潭州英语">#}
+{#                        <div class="course-content">#}
+{#                            <p class="course-info">django 项目</p>#}
+{#                            <p class="course-author">Youkou(python讲师)</p>#}
+{#                            <p class="course-price free">免费</p>#}
+{#                        </div>#}
+{#                    </a>#}
+{#                </li>#}
+{#                <li class="course-item">#}
+{#                    <a href="/course/3/">#}
+{#                        <img class="course-img" src="http://jaryxjca5eastx5jbfz.exp.bcevod.com/mda-jb4uh5nyjnzpa6u1/mda-jb4uh5nyjnzpa6u1.jpg"#}
+{#                            alt="潭州英语">#}
+{#                        <div class="course-content">#}
+{#                            <p class="course-info">django 项目</p>#}
+{#                            <p class="course-author">Youkou(python讲师)</p>#}
+{#                            <p class="course-price free">免费</p>#}
+{#                        </div>#}
+{#                    </a>#}
+{#                </li>#}
+
+            </ul>
+        </div>
+    </main>
+{% endblock %}
+<!-- footer start -->
+<!-- footer end -->
+{% block script %}
+    <script src="../../static/js/common.js"></script>
+{% endblock %}
+

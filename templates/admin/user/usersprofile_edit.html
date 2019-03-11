@@ -1,0 +1,132 @@
+{% extends 'admin/base/base.html' %}
+
+
+{% block title %}
+  信息编辑页
+{% endblock %}
+
+{% block content_header %}
+  信息编辑
+{% endblock %}
+
+{% block header_option_desc %}
+  信息编辑
+{% endblock %}
+
+
+{% block content %}
+  <link rel="stylesheet" href="{% static 'css/admin/base/bootstrap-datepicker.min.css' %}">
+  <style>
+    span {
+      font-weight: 700;
+      margin-top: 30px;
+    }
+    .form-check-label {
+      font-size: 14px;
+      color: #555;
+      line-height: 1.428;
+    }
+    .ml20 {
+     margin-left: 20px;
+   }
+
+   .mt20 {
+     margin-top: 20px;
+   }
+  </style>
+
+  <div class="row">
+    <div class="col-md-12 col-xs-12 col-sm-12">
+      <div class="box header" style="padding-bottom: 20px;">
+         <form action="" class="form-inline">
+           <div class="form-group ml20 mt20">
+             <label for="title">昵称：</label>
+             {% if user_profile %}
+                <input type="text" class="form-control" placeholder="请输入昵称" id="nickname" name="nickname" value="{{ user_profile.nickname }}">
+             {% else %}
+                <input type="text" class="form-control" placeholder="请输入昵称" id="nickname" name="nickname">
+             {% endif %}
+           </div>
+           <div class="form-group ml20 mt20">
+             <label for="select-time">出生日期：</label>
+             {% if user_profile %}
+               <input type="text" class="form-control" placeholder="请选择出生时间" readonly
+                    id="select-time" name="born_time" value="{{ user_profile.born_date|date:'Y/m/d'}}">
+             {% else %}
+               <input type="text" class="form-control" placeholder="请选择出生时间" readonly
+                    id="select-time" name="born_time">
+             {% endif %}
+           </div>
+           <div class="form-group ml20 mt20">
+             <label for="gender">性别：</label>
+             <select class="form-control" id="gender" name="gender">
+               <option value="0">--请选择性别--</option>
+               <option value="M" selected>男</option>
+               <option value="F">女</option>
+             </select>
+           </div>
+           <div class="form-group ml20 mt20">
+             <input class="btn btn-primary" type="reset" value="清除更改"></input>
+           </div>
+         </form>
+      </div>
+      <div class="box box-primary" style="margin-top: 20px">
+        <div class="box-body">
+          <div><span>用户名：</span><strong style="color: #ff851b;">{{ users.username }}</strong></div>
+          <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                  <th>昵称</th>
+                  <th>出生日期</th>
+                  <th>性别</th>
+                  <th>创建时间</th>
+                  <th>最近更新</th>
+                  <th>操作</th>
+                </tr>
+            </thead>
+            <tbody id="tbody">
+              <tr data-id="{{ user_profile.id }}">
+                <td>{{ user_profile.nickname }}</td>
+                <td>{{ user_profile.born_date|date:'Y年m月d日' }}</td>
+                <td>{{ user_profile.get_gender_display }}</td>
+                <td>{{ user_profile.create_time|date:'Y年m月d日H时m分s秒' }}</td>
+                <td>{{ user_profile.update_time|date:'Y年m月d日H时m分s秒' }}</td>
+                <td>
+                  {% if user_profile %}
+                    <button class="btn btn-xs btn-danger btn-del">删除</button>
+                  {% endif %}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="form-group" style="margin-top: 100px">
+            <label for="usersprofile-motto">座右铭</label>
+            {% if user_profile %}
+              <div id="usersprofile-motto" data-con="{{ user_profile.motto }}">
+              </div>
+            {% else %}
+              <div id="usersprofile-motto">
+              </div>
+            {% endif %}
+          </div>
+        </div>
+        <div class="box-footer">
+            {% if user_profile %}
+                <a href="javascript:void (0);" class="btn btn-primary pull-right" id="btn-edit-user"
+               data-user-id="{{ user_profile.user_id }}">更新信息 </a>
+            {% else %}
+                <a href="javascript:void (0);" class="btn btn-primary pull-right" id="btn-add-user"
+               data-user-id="{{ users.id }}">创建信息 </a>
+            {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block script %}
+  <script src="{% static 'js/admin/news/bootstrap-datepicker.min.js' %}"></script>
+  <script src="{% static 'js/admin/news/bootstrap-datepicker.zh-CN.min.js' %}"></script>
+  <script src="{% static 'js/admin/news/wangEditor.min.js' %}"></script>
+  <script src="{% static 'js/admin/user/usersprofile_manage.js' %}"></script>
+{% endblock %}
